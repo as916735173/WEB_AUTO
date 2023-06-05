@@ -4,30 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class loginDemo3 {
-    public static WebDriver driver = null;
-    //初始化
-    public static void init(){
-        // 指定浏览器驱动路径
-        System.setProperty("web-driver.chrome.driver", "src/chromedriver");
-        // 新建对象
-        driver = new ChromeDriver();
-//        // 最大化窗口
-//        driver.manage ().window ().maximize ();
-    }
-    //退出
-    public static void quit(){
-        //关闭并退出浏览器
-        //过3秒钟关闭浏览器
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        driver.quit();
-    }
+public class loginDemo3 extends BaseLoginDemo{
+
     //以数组形式获取public static Object[][] datas(){}的内容使用
-    public static void test(Object[] datas){
+    public  void test(Object[] datas){
         String login = datas[0].toString();
         String password = datas[1].toString();
         String str = datas[2].toString();
@@ -69,27 +49,12 @@ public class loginDemo3 {
         }
     }
     //将需要的数据以数组形式赋值
-    public static Object[][] datas(){
+    public Object[][] datas(){
         Object[][] datas = new Object[2][3];
         Object[] datas0 = {"admin_WSei62", "admin654321", "密码错误"};
         Object[] datas1 = {"admin_WSei62", "admin654", "正向测试"};
         datas[0] = datas0;
         datas[1] = datas1;
         return datas;
-    }
-    public static void loopTest(){
-        Object[][] datas = datas();
-        for (int i = 0; i < datas.length; i++){
-            test(datas[i]);
-        }
-    }
-    public static void main(String[] args)throws Exception{
-        init();
-        //可以循环反复执行test()
-//        test("admin_WSei62", "admin654321", "密码错误");
-//        test("admin_WSei62", "admin654", "正向测试");
-        //循环执行test
-        loopTest();
-        quit();
     }
 }
